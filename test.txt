@@ -1,0 +1,20 @@
+Rust gives memory safety without garbage collection.
+The cargo tool manages Rust projects and dependencies.
+Grep searches through text using patterns.
+ripgrep is a fast alternative to grep.
+Linux terminals are powerful for automation tasks.
+Web development includes frontend and backend systems.
+Ownership is one of the core concepts in Rust.
+Borrowing allows references without taking ownership.
+The compiler checks lifetimes at compile time.
+Binary search works on sorted arrays only.
+Trees and graphs are common DSA topics.
+Solana is a blockchain focused on high throughput.
+Privacy focused software often avoids telemetry.
+Neovim and tmux are popular terminal tools.
+Backend developers often work with databases and APIs.
+Cryptography is important in blockchain systems.
+Pattern matching is very useful in Rust enums.
+Cargo.toml stores Rust project metadata.
+Git helps developers track source code changes.
+Open source projects help improve coding skills.
