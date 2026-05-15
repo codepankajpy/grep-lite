@@ -1,4 +1,4 @@
-use std::{env, fs, process::exit};
+use std::{env, fs};
 
 // Here config stores borrowed references to command line arguments
 // it does not own the strings
