@@ -1,36 +1,21 @@
 use std::{env, fs};
-
-// Here config stores borrowed references to command line arguments
-// it does not own the strings
-struct Config<'args> {
-    path: &'args String,
-    query: &'args String
-}
+use grep_lite::config::Config;
 
 fn main() {
     // collect command line arguments in a vector of string type
     let env_args: Vec<String> = env::args().collect();
 
     // passing the slice of the vector to avoid trasferring ownership
-    let config = handle_argument(&env_args);
+    let config = Config::build(&env_args);
 
-    // read file contents into single string
-    let contents: String  = read_from_file(config.path);
+    // lowercase the query
+    let query = config.query.to_lowercase(); // fix this
+
+    // read file contents into single string and lowercase the contents
+    let contents: String  = read_from_file(config.path).to_lowercase(); // fix this
 
     // search each line for query
-    find_from_data(&contents, config.query);
-} 
-
-// lifetime 'args means: config cannot outlive the borrowed arguments
-fn handle_argument<'args>(args: &'args [String]) -> Config<'args>{
-    if args.len() < 3 {
-        eprintln!("Not enough arguments!!");
-    }
-    // borrowing reference instead of cloning
-    let path: &String = &args[1];
-    let query: &String = &args[2];
-    // this struct is storing references
-    Config {path, query}
+    find_from_data(&contents, &query);
 }
 
 // &str is preffered over &string for read-only string borrowing 
@@ -41,9 +26,11 @@ fn read_from_file(path: &str) -> String {
 
 fn find_from_data(data: &str, query: &str) {
     // .lines() creates and iterator over each line
+    let mut index = 1;
     for line in data.lines() {
         if line.contains(query){
-            println!("{line}");
+            println!("{index}  {line}");
         }
+        index += 1;
     }
 }
