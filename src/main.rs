@@ -1,21 +1,20 @@
 use std::{env, fs};
 use grep_lite::config::Config;
+use grep_lite::search::search;
 
 fn main() {
     // collect command line arguments in a vector of string type
     let env_args: Vec<String> = env::args().collect();
 
     // passing the slice of the vector to avoid trasferring ownership
-    let config = Config::build(&env_args);
+    let config = Config::build(&env_args).expect("Failed to parse arguments");
 
-    // lowercase the query
-    let query = config.query.to_lowercase(); // fix this
+    let contents = read_from_file(config.path).to_lowercase();
 
-    // read file contents into single string and lowercase the contents
-    let contents: String  = read_from_file(config.path).to_lowercase(); // fix this
+    let ans= search(&contents, &config.query.to_lowercase());
 
-    // search each line for query
-    find_from_data(&contents, &query);
+    output(ans);
+
 }
 
 // &str is preffered over &string for read-only string borrowing 
@@ -24,13 +23,8 @@ fn read_from_file(path: &str) -> String {
     fs::read_to_string(path).expect("Error reading from file!!")
 }
 
-fn find_from_data(data: &str, query: &str) {
-    // .lines() creates and iterator over each line
-    let mut index = 1;
-    for line in data.lines() {
-        if line.contains(query){
-            println!("{index}  {line}");
-        }
-        index += 1;
+fn output(ans: Vec<(usize, &str)>) {
+    for (index, value) in ans {
+        println!("{index} : {value}");
     }
 }

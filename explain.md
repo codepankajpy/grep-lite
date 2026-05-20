@@ -96,3 +96,43 @@ because String implements the Deref trait targeting str.
 
 - Self inside an impl block refers to the type currently being implemented.
 - The current Config struct acts as a lightweight borrowed view into command line arguments rather than creating new owned strings.
+
+
+## May 20 
+
+
+# In Professional Terms
+
+- search() borrows the original file contents instead of creating new owned strings.
+- .lines() creates an iterator over borrowed string slices (&str) from the original data.
+- .enumerate() transforms iterator items from:
+  
+rust &str 
+
+to:
+
+rust (usize, &str) 
+
+where:
+  - usize represents the line index
+  - &str represents the line content
+
+- .filter() retains only iterator items matching the query condition.
+- .collect() consumes the iterator and builds a concrete collection type.
+- The iterator item type determines what collect() can construct.
+- Because enumerate() produces tuples, the final collection type must be:
+
+rust Vec<(usize, &str)> 
+
+instead of:
+
+rust Vec<&str> 
+
+- Tuple destructuring allows direct extraction of tuple elements:
+
+rust for (index, value) in ans 
+
+- Rust compiler diagnostics often describe iterator type transformations step-by-step through the method chain.
+- enumerate() starts indexing from 0, matching Rust’s standard indexing model.
+- The lifetime 'matches ensures returned string slices cannot outlive the original file content buffer.
+- The search implementation avoids unnecessary allocations because all matching lines are borrowed references into the original file contents.
