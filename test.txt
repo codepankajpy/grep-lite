@@ -1,4 +1,4 @@
-Rust gives memory safety without garbage collection.
+Rust gives memory safety rust without garbage collection.
 The cargo tool manages Rust projects and dependencies.
 Grep searches through text using patterns.
 ripgrep is a fast alternative to grep.

@@ -1,12 +1,14 @@
-/// Stores borrowed command line arguments
-///
-/// See:
-/// - ../explain.md/#config-ownership-flow
-/// - ../explain.md/#deref-coercion
+// use clap::Parser;
 
-pub struct Config<'args> {
-    pub path: &'args str,
+// #[derive(Parser, Debug)]
+// #[command(version, about, long_about = None)]
+pub struct Config<'args>{
+
+    // #[arg(required = true)]
     pub query: &'args str,
+    
+    // #[arg(required = true)]
+    pub path: &'args str,
 }
 
 impl<'args> Config<'args> {
