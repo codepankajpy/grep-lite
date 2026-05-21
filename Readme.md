@@ -1,37 +1,111 @@
 # Grep-Lite
-A Rust-based grep tool built as a side learning project.
+
+A lightweight grep-like CLI tool written in Rust as a systems programming learning project.
+
 ---
-# Day 1
 
-## What I Built
-- A basic grep-like CLI tool
-- Reads file path and query from command line arguments
-- Searches for matching lines inside a file
-- Prints matching lines to stdout
+## Table of contents
 
-## What I Learned
-- Borrowing references using `&`
-- Using lifetimes with structs
-- Storing references inside structs
-- Passing slices like `&[String]`
-- Difference between `&String` and `&str`
-- Reading files using `fs`
-- Iterating over lines using `.lines()`
-- Searching substrings using `.contains()`
+- Features
+- Example
+- Project structure
+- What I learned
+- Crates used
+- Installation
 
-## New Functions / Methods
-### `env::args()`
-Used to get command line arguments.
+---
 
-### `env::args().collect()`
-Used to collect iterator values into a vector.
+## Features
 
-### `fs::read_to_string()`
-Reads entire file into a String.
+- Search for matching lines inside files
+- Case-insensitive search
+- Line-numbered output
+- Highlight matched query in terminal output
+- Simple CLI interface
+- Modular project structure
 
-## Libraries Used
+---
 
-### `use std::{env, fs};`
-* env → command line arguments
-* fs → file handling
+## Example
 
+Command:
+
+cargo run -- test.txt Rust
+
+Output:
+
+1 : Rust gives memory safety without garbage collection.
+2 : The cargo tool manages Rust projects and dependencies.
+
+---
+
+## Project structure
+
+src/
+├── main.rs
+├── search.rs
+├── print.rs
+└── config.rs
+
+---
+
+## What I learned
+
+### Rust concepts
+
+- Ownership and borrowing
+- Lifetimes with structs
+- Borrowed data inside structs
+- &str vs &String
+- Passing slices using &[String]
+- Modularization using separate files/modules
+- Iterators and closures
+- Working with Vec<T>
+- String manipulation and formatting
+
+### File handling
+
+- Reading files using fs::read_to_string
+- Iterating using .lines()
+
+### Searching logic
+
+- Using .contains()
+- Case-insensitive matching using .to_lowercase()
+- Filtering iterators with .filter()
+
+### CLI development
+
+- Reading command line arguments with env::args()
+- Building configuration structs from arguments
+
+### Terminal output
+
+- Colored terminal output using the colored crate
+- Highlighting matched substrings
+
+---
+
+## Crates used
+
+- colored = "3" — used for colored terminal output
+
+---
+
+## Installation
+
+Run locally:
+
+cargo run -- test.txt Rust
+
+Build release binary:
+
+cargo build --release
+
+Install globally:
+
+cargo install --path .
+
+Then run:
+
+grep-lite test.txt Rust

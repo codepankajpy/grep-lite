@@ -1,5 +1,6 @@
 use std::{env, fs};
 use grep_lite::config::Config;
+use grep_lite::print::output;
 use grep_lite::search::search;
 
 fn main() {
@@ -9,11 +10,11 @@ fn main() {
     // passing the slice of the vector to avoid trasferring ownership
     let config = Config::build(&env_args).expect("Failed to parse arguments");
 
-    let contents = read_from_file(config.path).to_lowercase();
+    let contents = read_from_file(config.path);
 
     let ans= search(&contents, &config.query.to_lowercase());
 
-    output(ans);
+    output(ans, &config.query);
 
 }
 
@@ -23,8 +24,3 @@ fn read_from_file(path: &str) -> String {
     fs::read_to_string(path).expect("Error reading from file!!")
 }
 
-fn output(ans: Vec<(usize, &str)>) {
-    for (index, value) in ans {
-        println!("{index} : {value}");
-    }
-}
