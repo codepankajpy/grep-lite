@@ -1,9 +1,6 @@
-
-pub fn search<'matches>(data: &'matches str, query: &str) ->  Vec<(usize, &'matches str)>{
-    // .lines() creates and iterator over each line
-    let query = query.to_lowercase();
+pub fn search<'matches>(current_line: &'matches str, query: &str) ->  bool {
     
-    data.lines().enumerate().filter(|(_, line)| {
-        line.to_lowercase().contains(&query)
-    }).collect()
+    let query = &query.to_lowercase();
+
+    return current_line.to_lowercase().contains(query);
 }

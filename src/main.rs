@@ -1,23 +1,14 @@
-use std::fs;
-use grep_lite::{cli::config::Config, print::output};
-use grep_lite::search::search;
+use grep_lite::read::read;
+use grep_lite::config::Config;
+use std::io::Error;
 use clap::Parser;
 
-fn main() {
+fn main() -> Result<(), Error>{
 
     let args = Config::parse();
 
-    let contents = read_from_file(&args.path);
+    read(&args.path, &args.query)?;
 
-    let ans= search(&contents, &args.query);
-
-    output(ans, &args.query);
+    Ok(())
 
 }
-
-// &str is preffered over &string for read-only string borrowing 
-fn read_from_file(path: &str) -> String {
-    // read entire file into memory 
-    fs::read_to_string(path).expect("Error reading from file!!")
-}
-

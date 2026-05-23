@@ -10,4 +10,3 @@ pub struct Config{
     #[arg(required = true)]
     pub path: String,
 }
-

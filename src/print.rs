@@ -1,13 +1,11 @@
 use colored::*;
 use regex::Regex;
 
-pub fn output(ans: Vec<(usize, &str)>, query: &str) {
-
-    for (index, value) in ans {
-        println!("{} : {}", index+1, highlight(value, query));
-    }
+pub fn output(index: usize, current_line: &str, query: &str){
+    println!("{} : {}", index+1, highlight(current_line, query));
 }
 
+// wrote with the help of chatgpt - learn about replace_all more
 fn highlight(line: &str, query: &str) -> String {
     let regex = Regex::new(&format!("(?i){}", regex::escape(query))).unwrap();
 
