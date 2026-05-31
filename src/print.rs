@@ -15,3 +15,18 @@ fn highlight(line: &str, query: &str) -> String {
         })
         .to_string()
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn highlight_check(){
+        let current_line = "Hello my name is Pankaj. I am learning rust.";
+        let query = "Javascript";
+
+        assert_eq!(highlight(current_line, query), current_line);
+        assert_ne!(highlight(current_line, query), current_line);
+    }
+}

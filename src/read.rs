@@ -21,3 +21,15 @@ pub fn read(path: &str, query: &str) -> Result<(), Error>{
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn file_not_exist(){
+        let query = "hello";
+        let path = "./random.txt";
+        assert!(read(path, query).is_err());
+    }
+}
